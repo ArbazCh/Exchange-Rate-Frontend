@@ -6,11 +6,26 @@
     margin: 20px;
 }
 .main input{
-    width: 300px;
+    width: 250px;
     height: 30px;
     border-radius: 8px;
     padding: 6px;
     margin: 12px;
+}
+#convert-btn{
+    float: right;
+    padding: 10px;
+    width: 134px;
+    margin: 16px;
+    border-radius: 8px
+}
+.conveted-amount{
+    margin-top: 70px;
+    border: groove;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    width: 100%
 }
 .exchange-history{
     /* display: inline-block; */

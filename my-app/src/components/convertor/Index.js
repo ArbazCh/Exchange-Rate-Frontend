@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { Bar } from "../bar/index.js";
+import { convertService } from "../../services/convertor.service.js";
 import "./index.css";
 
 const Convertor = () => {
   const [initialState, setInitialState] = useState({
-    amount: null,
-    base: "USD",
-    target: "PKR",
-    exchangeRate: null,
+    amount: "",
+    base: "",
+    target: "",
+    exchangeRate: "",
   });
-  const [convertedAmount, setConvertedAmount] = useState(null);
+  const [convertedAmount, setConvertedAmount] = useState("");
   const { amount, base, target, exchangeRate } = initialState;
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const Convertor = () => {
     setInitialState({
       ...initialState,
       amount: input,
-      exchangeRate: null,
+      exchangeRate: "",
     });
   };
   const handleBase = (input) => {
@@ -39,41 +40,58 @@ const Convertor = () => {
     });
   };
   const handleConvert = async () => {
-    const { data } = await axios.get(
-      `https://api.exchangerate.host/convert?from=${base}&to=${target}`
-    );
+    const result = await convertService(base, target);
     setInitialState({
       ...initialState,
-      exchangeRate: data.result,
+      exchangeRate: result,
+    });
+  };
+
+  const handleRevert = () => {
+    setInitialState({
+      ...initialState,
+      base: target,
+      target: base,
+      exchangeRate: "",
     });
   };
 
   return (
     <>
+      <Bar />
       <div className="wrapper">
         <div className="main">
           <h1>Currency Exchange</h1>
           <input
             type="number"
-            placeholder="Enter the Value"
+            id="amount"
+            placeholder="Enter amount to convert"
             onChange={(e) => handleInput(e.target.value)}
           />
-          <br />
+          {/* <br /> */}
           <input
             type="text"
-            placeholder={`Enter the base currency like: ${base}`}
+            id="base"
+            value={`${base}`}
+            // placeholder="Please Enter the Base Currency"
             onChange={(e) => handleBase(e.target.value)}
           />
-          <br />
+          {/* <br /> */}
+          <button onClick={() => handleRevert()}>Revert</button>
           <input
             type="text"
-            placeholder={`Enter the target currency like: ${target}`}
+            id="target"
+            value={`${target}`}
+            // placeholder="Please Enter the Target Currency"
             onChange={(e) => handleTarget(e.target.value)}
           />
           <br />
-          <button onClick={() => handleConvert()}>Convert</button>
-          <button>Revert</button>
-          <h3>{convertedAmount}</h3>
+          <button id="convert-btn" onClick={() => handleConvert()}>
+            Convert
+          </button>
+          <div className="conveted-amount">
+            <h4>{`${convertedAmount}`}</h4>
+          </div>
         </div>
       </div>
     </>
