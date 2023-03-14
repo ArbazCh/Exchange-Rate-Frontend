@@ -1,0 +1,13 @@
+.exchange-history{
+    /* display: inline-block; */
+    /* border: 2px solid red; */
+    height: 30rem;
+    width: 70rem;
+    margin: auto;
+    margin-top: 40px;
+
+}
+.line-graph{
+    height: 30rem;
+    width: 70rem
+}

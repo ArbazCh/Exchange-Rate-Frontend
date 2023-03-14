@@ -27,19 +27,6 @@
     justify-content: center;
     width: 100%
 }
-.exchange-history{
-    /* display: inline-block; */
-    border: 2px solid red;
-    height: 200px;
-    width: 200px;
-    margin: 20px;
-}
-.conversion-history{
-    border: 2px solid red;
-    height: 200px;
-    width: 200px;
-    margin: 20px;  
-}
 .wrapper{
     margin: 148px;
     display: flex;

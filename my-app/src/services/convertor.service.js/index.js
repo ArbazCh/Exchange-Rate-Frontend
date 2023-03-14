@@ -1,13 +1,9 @@
-import axios from "axios";
+import API from "../../api/api.config";
 
 export const convertService = async (base, target) => {
   try {
-    // console.log("here");
-    const { data } = await axios.get(
-      `https://api.exchangerate.host/convert?from=${base}&to=${target}`
-    );
-    // console.log("data: ", data);
-    return data.result;
+    const { data } = await API.get(`/convert?from=${base}&to=${target}`);
+    return data;
   } catch (error) {
     console.log("Convert Service Catch Error", error);
   }

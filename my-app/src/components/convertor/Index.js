@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Bar } from "../bar/index.js";
 import { convertService } from "../../services/convertor.service.js";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateBase,
+  updateTarget,
+  toggleCurrency,
+} from "../../redux/slices/convert";
 import "./index.css";
-
 const Convertor = () => {
+  const dispatch = useDispatch();
+  const [convertedAmount, setConvertedAmount] = useState("");
+  const { base, target } = useSelector((state) => state.convert);
   const [initialState, setInitialState] = useState({
     amount: "",
-    base: "",
-    target: "",
     exchangeRate: "",
   });
-  const [convertedAmount, setConvertedAmount] = useState("");
-  const { amount, base, target, exchangeRate } = initialState;
-
-  useEffect(() => {
-    if (exchangeRate && amount) {
-      const convertedAmount = exchangeRate * amount;
-      setConvertedAmount(convertedAmount);
-    }
-  }, [exchangeRate, amount]);
-
+  const { amount, exchangeRate } = initialState;
   const handleInput = (input) => {
     setInitialState({
       ...initialState,
@@ -28,67 +24,71 @@ const Convertor = () => {
     });
   };
   const handleBase = (input) => {
-    setInitialState({
-      ...initialState,
-      base: input.toUpperCase(),
-    });
+    dispatch(updateBase(input));
   };
   const handleTarget = (input) => {
-    setInitialState({
-      ...initialState,
-      target: input.toUpperCase(),
-    });
+    dispatch(updateTarget(input));
   };
+  const handleRevert = () => {
+    dispatch(toggleCurrency());
+  };
+  useEffect(() => {
+    if (exchangeRate && amount) {
+      const convertedAmount = exchangeRate * amount;
+      setConvertedAmount(convertedAmount);
+    }
+  }, [exchangeRate, amount]);
+
   const handleConvert = async () => {
-    const result = await convertService(base, target);
+    const response = await convertService(base, target);
+    const { result } = response;
     setInitialState({
       ...initialState,
       exchangeRate: result,
     });
   };
 
-  const handleRevert = () => {
-    setInitialState({
-      ...initialState,
-      base: target,
-      target: base,
-      exchangeRate: "",
-    });
-  };
-
   return (
     <>
-      <Bar />
       <div className="wrapper">
         <div className="main">
           <h1>Currency Exchange</h1>
+
+          {/* Enter the Amount to Convert */}
+
           <input
             type="number"
-            id="amount"
             placeholder="Enter amount to convert"
             onChange={(e) => handleInput(e.target.value)}
           />
-          {/* <br /> */}
+
+          {/* Enter Base Currency */}
+
           <input
             type="text"
-            id="base"
             value={`${base}`}
-            // placeholder="Please Enter the Base Currency"
             onChange={(e) => handleBase(e.target.value)}
           />
-          {/* <br /> */}
-          <button onClick={() => handleRevert()}>Revert</button>
+
+          {/* Toggle Currencies */}
+
+          <button onClick={() => handleRevert()}>Toggle</button>
+
+          {/* Enter Target Currency */}
+
           <input
             type="text"
             id="target"
             value={`${target}`}
-            // placeholder="Please Enter the Target Currency"
             onChange={(e) => handleTarget(e.target.value)}
           />
+
           <br />
+
           <button id="convert-btn" onClick={() => handleConvert()}>
             Convert
           </button>
+
           <div className="conveted-amount">
             <h4>{`${convertedAmount}`}</h4>
           </div>
