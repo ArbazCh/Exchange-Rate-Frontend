@@ -1,6 +1,25 @@
 .conversion-history{
     border: 2px solid red;
-    height: 200px;
-    width: 200px;
+    height: 30rem;
+    width: 70rem;
     margin: 20px;  
 }
+/* Style for the table */
+table {
+    border-collapse: collapse;
+    width: 70%;
+    margin: 60px;
+  }
+  th,
+  td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  

@@ -10,6 +10,9 @@ import "./index.css";
 const Convertor = () => {
   const dispatch = useDispatch();
   const [convertedAmount, setConvertedAmount] = useState("");
+  const [history, setHistory] = useState(
+    JSON.parse(localStorage.getItem("history")) || []
+  );
   const { base, target } = useSelector((state) => state.convert);
   const [initialState, setInitialState] = useState({
     amount: "",
@@ -46,7 +49,18 @@ const Convertor = () => {
       ...initialState,
       exchangeRate: result,
     });
+    const conversion = {
+      amount: amount,
+      base: base,
+      target: target,
+      rate: result,
+      timestamp: new Date(),
+    };
+    setHistory([...history, conversion]);
   };
+  useEffect(() => {
+    localStorage.setItem("history", JSON.stringify(history));
+  }, [history]);
 
   return (
     <>
