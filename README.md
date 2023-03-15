@@ -1,4 +1,4 @@
-#Exchange-Rate-Frontend
+**Exchange-Rate-Frontend**
 Exchange-Rate-Frontend is a web application built using React and Semantic UI that allows users to view exchange rates for different currencies. The project is designed to consume an API that provides exchange rate data and display it in a user-friendly format.
 
 **Features**
