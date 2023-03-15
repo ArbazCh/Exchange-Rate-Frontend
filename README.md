@@ -13,10 +13,10 @@ Exchange-Rate-Frontend is a web application built using React and Semantic UI th
 
 Clone the repository using Git:
 
-git clone https://github.com/ArbazCh/Exchange-Rate-Frontend.git
-cd Exchange-Rate-Frontend/my-app
-npm install
-npm start
+1. git clone https://github.com/ArbazCh/Exchange-Rate-Frontend.git
+2. cd Exchange-Rate-Frontend/my-app
+3. npm install
+4. npm start
 
 This will start the development server and open the application in your default browser at http://localhost:3000/.
 
