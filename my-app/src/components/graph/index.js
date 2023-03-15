@@ -4,6 +4,7 @@ import { LineChart } from "../lineChart/index.js";
 import { useSelector } from "react-redux";
 import { getDate, getDateNDaysAgo } from "../../utils/date.js";
 import "./index.css";
+import { Toggle } from "../toggleIcon/index.js";
 
 export const Graph = () => {
   const end = getDate();
@@ -20,6 +21,8 @@ export const Graph = () => {
     const getData = async () => {
       const response = await TimeSeriesService(start, end, base, target);
       const rates = Object.values(response.rates);
+
+      // Graph Dataset
       const chartData = {
         labels: Object.keys(response.rates),
         datasets: [
@@ -46,11 +49,11 @@ export const Graph = () => {
           <option value="14">Last 14 days</option>
           <option value="30">Last 30 days</option>
         </select>
-        <select id="historyDropdown">
-          <option value="chart">Chart</option>
-          <option value="table">Table</option>
-        </select>
 
+        {/* Toggle Icon */}
+        <Toggle />
+
+        {/* Line Chart   */}
         <div className="line-graph">
           {Object.keys(chartData).length !== 0 && (
             <LineChart chartData={chartData} />

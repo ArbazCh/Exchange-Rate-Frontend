@@ -12,7 +12,7 @@
     padding: 6px;
     margin: 12px;
 }
-#convert-btn{
+.convert-btn{
     float: right;
     padding: 10px;
     width: 134px;
@@ -21,6 +21,8 @@
 }
 .conveted-amount{
     margin-top: 70px;
+    height: 40px;
+    align-items: center;
     border: groove;
     border-radius: 15px;
     display: flex;

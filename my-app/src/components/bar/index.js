@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "../button";
+import "./index.css";
 
 export const Bar = () => {
   return (
     <div className="bar">
       <Link to="/">
-        <button>Convertor</button>
+        <Button button={"Convertor"} />
       </Link>
       <Link to="/stats">
-        <button>Statistics</button>
+        <Button button={"Statistics"} />
       </Link>
       <Link to="/history">
-        <button>Your Conversions</button>
+        <Button button={"Your Conversions"} />
       </Link>
     </div>
   );

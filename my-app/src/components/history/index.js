@@ -8,6 +8,10 @@ export const History = () => {
     const history = JSON.parse(localStorage.getItem("history"));
     setHistory(history);
   }, []);
+  const handleClear = () => {
+    localStorage.removeItem("history");
+    setHistory([]);
+  };
   return (
     <>
       <Bar />
@@ -34,6 +38,11 @@ export const History = () => {
             ))}
           </tbody>
         </table>
+        <div style={{ float: "left" }}>
+          <button onClick={() => handleClear()} className="convert-btn">
+            Clear All
+          </button>
+        </div>
       </div>
     </>
   );
